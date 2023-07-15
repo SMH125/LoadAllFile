@@ -1,0 +1,65 @@
+
+
+attributes__________________________________________
+ 
+
+int yearOfExperience;
+    int age;
+    int totalRides;
+    int salary;
+
+
+
+
+
+function_______________________________________________________________________
+
+int setExperience(){
+    	cout<<"\nEnter years of experience : ";
+    	cin>>yearOfExperience;
+    	return yearOfExperience;
+	}
+	int setAge(){
+		cout<<"\nEnter age : ";
+		cin>>age;
+		return age;
+	}
+	int setRides(){
+		cout<<"\nEnter total rides remaining : ";
+		cin>>totalRides;
+		return totalRides;
+	}
+	int setSalary(){
+		cout<<"\nEnter total salary : ";
+		cin>>salary;
+		return salary;
+	}
+
+Car_________________________________________________________________________________________________________________
+attributes___________________________________
+int NoOfSeates;
+    string NoPlate;
+    int timeLimit;
+    int price;
+Functions_________________________________________
+int setNoOfseats(){
+    	cout<<"\nEnter number of seats : ";
+    	cin>>NoOfSeates;
+    	return NoOfSeates;
+	}
+	string setNoPlate(){
+		cout<<"\nEnter number Plate : ";
+		cin.ignore();
+		getline(cin,NoPlate);
+		return NoPlate;
+	}
+	int setPrice(){
+		cout<<"\nEnter Price of ride : ";
+		cin>>price;
+		return price;
+	}
+	int setTime(){
+		cout<<"\nEnter reserved Time : ";
+		cin>>timeLimit;
+		return timeLimit;
+	}

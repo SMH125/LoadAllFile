@@ -1,0 +1,315 @@
+=========================================== QUESTION # 01 =========================================
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+void write_in_file()
+{
+    string str;
+    fstream fp;
+    fp.open("task1.txt",ios::out);
+    if(!fp)
+    {
+        cout<<"File not created"<<endl;
+        exit(0);
+    }
+    else
+    {
+        cout<<"Enter the string"<<endl;
+        getline(cin,str);
+        fp<<str<<" "<<str.length();
+
+    }
+
+}
+void read_from_file()
+{
+    fstream fp;
+    fp.open("task1.txt",ios::in);
+    if(!fp)
+    {
+        cout<<"File not found"<<endl;
+        exit(0);
+    }
+    else
+    {
+        while(!fp.eof())
+        {
+            string str;
+            fp>>str;
+            cout<<str<<" ";
+        }
+        
+    }
+}
+int main()
+{
+    write_in_file();
+    read_from_file();
+}
+=========================================== QUESTION # 02 =========================================
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+void write_in_file(string &s)
+{
+    fstream fp;
+    fp.open("task2(1).txt",ios::out);
+    if(!fp)
+    {
+        cout<<"File not created"<<endl;
+    }
+    else{
+        fp<<s;
+    }
+    fp.close();
+
+}
+void copy_from_file()
+{
+    fstream fp1,fp2;
+    fp1.open("task2(1).txt",ios::in);
+    fp2.open("task2(2).txt",ios::out);
+    if (!fp1 || !fp2)
+    {
+        cout<<"File not found"<<endl;
+        exit(0);
+    }
+    else
+    {
+        while (!fp1.eof())
+        {
+            string str;
+            fp1>>str;
+            fp2<<str<<" ";
+        }
+        cout<<"Contents copied"<<endl;
+        
+    }
+    fp1.close();
+    fp2.close();
+}
+
+int main()
+{
+    string str;
+    cout<<"Enter the string"<<endl;
+    getline(cin,str);
+    write_in_file(str);
+    copy_from_file();
+}
+=========================================== QUESTION # 03 =========================================
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class person
+{
+    string name;
+    int age;
+    public:
+    //parametrized constructor
+    person(string n, int a)
+    {
+        name = n;
+        age = a;
+    }
+    person(){}
+    void show()
+    {
+        cout<<"Name is "<<name<<endl;
+        cout<<"Age is "<<age<<endl;
+    }
+};
+
+int main()
+{
+    person person1("Ammar",19);
+    fstream fp;
+    fp.open("person.dat",ios::out | ios::binary);
+    if (!fp)
+    {
+        cout<<"File not created"<<endl;
+    }
+    else
+    {
+        fp.write((char*)&person1,sizeof(person1));
+    }
+    person person2;
+    fp.close();
+    fp.open("person.dat",ios::in | ios::binary);
+    if(!fp)
+    {
+        cout<<"File not found"<<endl;
+        exit(0);
+    }
+    else
+    {
+        fp.read((char*)&person2,sizeof(person2));
+    }
+    person2.show();
+    fp.close();
+}
+=========================================== QUESTION # 04 =========================================
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class participant
+{
+    string name;
+    int id,score;
+    public:
+        void input()
+        {
+            fflush(stdin);
+            cout<<"Enter name of the player "<<endl;
+            getline(cin,name);
+            cout<<"Enter id "<<endl;
+            cin>>id;
+            cout<<"Enter score"<<endl;
+            cin>>score;
+           
+        }
+        int get_id(){return id;}
+        int get_score(){return score;}
+        void show()
+        {
+            cout<<"Name is "<<name<<endl<<"id is: "<<id<<endl<<"score is: "<<score<<endl;
+        }
+        
+};
+void write_in_file(participant &p1, participant &p2)
+{
+      fstream fp;
+        fp.open("participant.dat",ios::out | ios::binary);
+        if(!fp)
+        {
+            cout<<"File not found"<<endl;
+            exit(0);
+        }
+        else
+        {
+            fp.write((char*)&p1,sizeof(p1));
+            fp.write((char*)&p2,sizeof(p2));
+        }
+}
+void read_from_file()
+{
+    fstream fp;
+    participant p1,p2;
+    fp.open("participant.dat",ios::in | ios::binary);
+    if (!fp)
+    {
+        cout<<"File not found"<<endl;
+        exit(0);
+    }
+    else
+    {
+        fp.read((char*)&p1,sizeof(p1));
+        fp.read((char*)&p2,sizeof(p2));
+    }
+    //cout<<"Reading from file"<<endl;
+    //p1.show();
+    //p2.show();
+    int id,max=0;
+    cout<<"Enter ID"<<endl;
+    cin>>id;
+    if(id==p1.get_id())
+    {
+        p1.show();
+    }
+    else if(id==p2.get_id())
+    {
+        p2.show();
+    }
+    else
+    {
+        cout<<"The inputted id does not match any participant"<<endl;
+    }
+    if(max<p1.get_score())
+    {
+        max = p1.get_score();
+    }
+    if (max<p2.get_score())
+    {
+        max = p2.get_score();
+    }
+    cout<<"Maximum score is: "<<max<<endl;
+}
+int main()
+{
+    participant p1,p2;
+    p1.input();
+    p2.input();
+    write_in_file(p1,p2);
+    read_from_file();
+}
+=========================================== QUESTION # 05 =========================================
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    int count=0;
+    int i=0,n;
+    cout<<"Enter number of lines you want to enter"<<endl;
+    cin>>n;
+    fstream fp;
+    fp.open("story.txt",ios::out);
+    if (!fp)
+    {
+        cout<<"File not found"<<endl;
+        exit(0);
+    }
+    else
+    {
+        string str;
+        while (i<n)
+        {
+            fflush(stdin);
+            getline(cin,str);
+            fp<<str;
+            i++;
+            if (i!=n)
+            {
+                fp<<endl;
+            }
+            
+        }
+
+    }
+    fp.close();
+    fp.open("story.txt",ios::in);
+    if(!fp)
+    {
+        cout<<"File not found"<<endl;
+        exit(0);
+    }
+    else
+    {
+        while (!fp.eof())
+        {
+            string str;
+            getline(fp,str);
+            //cout<<str<<endl;
+            if (str[0]!='A')
+            {
+                count++;
+            }
+                
+        }
+        
+    }
+    cout<<"Number of lines that does not start with 'A' are: "<<count<<endl;
+    
+}
+
+========================================== LA FIN!! ==============================================

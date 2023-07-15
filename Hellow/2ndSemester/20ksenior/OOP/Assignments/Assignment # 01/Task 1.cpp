@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class universe7
+{
+	regional_office r1,r2;	
+};
+
+class regional_office
+{
+	string name_of_head;
+	double profit,electricity_bill,expense,turnout_day,gas_bill;
+	
+	public:
+		//constructor
+		regional_office()
+		{
+			profit = 0;
+			electricity_bill = 0;
+			expense = 0;
+			turnout_day = 0;
+			gas_bill = 0;
+		}
+		//setter functions
+		void set_name(string name)
+		{
+			name_of_head = name;
+		}
+		void set_turnout (double turn_out)
+		{
+			turnout_day = turn_out;
+		}
+		void calculate_gas(double rate, double units)
+		{
+			//gas_bill = units*rate;
+		}
+		void calculate_electricity(double rate,double units)
+		{
+			//electricity_bill = units*rate;
+		}
+		void calculate_expense()
+		{
+			//expense = electricity_bill+gas_bill;
+		}
+		void calculate_profit()
+		{
+			//profit = turnout_day - expense;
+		}
+		//getter functions
+		double get_expense()
+		{
+			return expense;
+		}
+		double get_profit()
+		{
+			return profit;
+		}
+};

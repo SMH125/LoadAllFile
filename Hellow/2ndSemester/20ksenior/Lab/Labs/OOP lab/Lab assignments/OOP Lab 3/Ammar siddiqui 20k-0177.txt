@@ -1,0 +1,248 @@
+						QUESTION # 01
+==============================================================================================================================================================================
+#include <iostream>
+#include <string>
+using namespace std;
+class User 
+{
+    public:
+        int age;
+        string  name;
+        void setdata(int a, string n)
+        {
+            name=n;
+            age=a;
+        }
+        void show()
+        {
+            cout <<"My name is "<<name<<" and I'm "<<age<<" years old"<<endl;
+        }
+};
+
+int main()
+{
+    User u1;
+    u1.setdata(24,"Teo");
+    u1.show();
+}
+
+					QUESTION # 02
+==============================================================================================================================================================================
+#include <iostream>
+#include <string>
+
+using namespace std;
+class date {
+    int  month,day,year;
+    public:
+    void setdata(int m,int d, int y)
+    {
+        month=m;day=d;year=y;
+    }
+    int return_day()
+    {return day;}
+    int return_month()
+    {return month;}
+    int return_year()
+    {return year;}
+};
+
+int main()
+{
+    int m,d,y;
+    date d1;
+    d1.setdata(02,25,2021);
+    m = d1.return_month();
+    d = d1.return_day();
+    y = d1.return_year();
+    cout<<d<<'/'<<m<<'/'<<y<<endl;
+	
+
+
+}
+					QUESTION # 03
+==============================================================================================================================================================================
+#include <iostream>
+#include <string>
+using namespace std;
+class Glass {
+    public:
+    int liquidlevel;
+    Glass()
+    {
+        liquidlevel = 200;
+    }
+    void Drink(int mm)
+    {
+    
+        liquidlevel = 200 - mm;
+        if (liquidlevel<100)
+        {
+            refill();
+        }
+        else
+        {
+        	
+        	cout << "The amount consumed is : "<<mm<<"millimeters"<<endl;
+        	cout <<"The quantity glass is containing is: "<<liquidlevel<<" millimeters"<<endl;
+		}
+    }
+    void refill()
+    {
+        liquidlevel=200;
+        cout << "Liquid refilled"<<endl;
+        cout << "Liquid in glass is "<<liquidlevel<<endl;
+    }
+    void show()
+    {
+    	cout<<"You have consumed "<<liquidlevel<<"milliliters"<<endl;
+	}
+};
+
+int main()
+{
+    Glass g1;
+    int i=1;
+    while (1)
+    {
+        int amount;
+        cout<<"Dear costumer "<<i<<endl<<"Enter the amount of liquid you've consumed (in millimeters)"<<endl;
+        cin>>amount;
+        g1.Drink(amount);
+        //g1.show();
+        char ch;
+        cout<<"Enter E or e if you want to exit"<<endl;
+        fflush(stdin);
+        cin>>ch;
+        if (ch=='e'||ch=='E')
+        break;
+        i++;
+    }
+    
+}
+				QUESTION # 04
+==============================================================================================================================================================================
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+class Employee 
+{
+    string f_name,l_name;
+    double salary;
+    public:
+        void setdata(string name1, string name2,double sal)
+        {
+            f_name=name1;
+            l_name=name2;
+            if (sal<0)
+            {
+                salary = 0.0;
+            }
+            else
+            {
+                salary = sal;
+            }
+        }
+        void show()
+        {
+            cout<<"First Name: "<<f_name<<endl;
+            cout<<"Last Name: "<<l_name<<endl;
+            cout<<"Monthly Salary: $"<<salary;
+        }
+        double return_salary()
+        {return salary;}
+
+};
+
+int main()
+{
+    Employee e1,e2;
+    //string firstname,lastname;
+    double sal1,sal2;
+    e1.setdata("Ammar","Siddiqui",-12345.998);
+    e2.setdata("Ali","Uddin",4567.990);
+    e1.show();
+    //e2.show();
+    sal1=e1.return_salary();
+    sal2=e2.return_salary();
+    cout<<endl<<"Yearly Salary of the employe is $"<<sal1*12;
+    cout<<endl<<"After 10% increment the new salary of the employee is: $"<<(sal1*12)  + (0.1*sal1)<<endl<<endl;
+    e2.show();
+    cout<<endl<<"Yearly Salary of the employe is $"<<sal2*12;
+    cout<<endl<<"After 10% increment the new salary of th employee is: $"<<(sal2*12)  + (0.1*sal2)<<endl;
+
+
+
+
+
+
+
+}
+				QUESTION # 05
+==============================================================================================================================================================================
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book
+{
+	string 	book_name,author,publisher;
+	int isbn;
+	public:
+		//setter functions
+		void setData(string b_name, string a, string p,int isb)
+		{
+			book_name = b_name;
+			author =  a;
+			publisher = p;
+			isbn = isb;
+		}
+		
+		int return_isbn()
+		{return isbn;}
+		void show()
+		{
+			cout << "Name of book is: "<<book_name<<endl;
+			cout << "Author is: "<<author<<endl;
+			cout << "Publisher is: "<<publisher<<endl;
+			cout << "ISBN number is: "<<isbn<<endl<<endl<<endl;
+		}
+};
+
+int main()
+{
+	string b_name,author,publisher;
+	int isbn,match_isbn;
+	Book Book[5];
+	for (int i=0; i<5 ; i++)
+	{
+		cout<<"Enter book name, author, publisher and isbn number for book "<<i+1<<endl;
+		//cin>>b_name>>author>>publisher>>isbn;
+		fflush(stdin);
+		getline(cin,b_name);
+		fflush(stdin);
+		getline(cin,author);
+		fflush(stdin);
+		getline(cin,publisher);
+		fflush(stdin);
+		cin>>isbn;
+		Book[i].setData(b_name,author,publisher,isbn);
+	}
+	system("CLS");
+	cout << "Enter the isbn number of the book you want to search"<<endl;
+	cin>>match_isbn;
+	for (int i=0;i<5;i++)
+	{
+		isbn = Book[i].return_isbn();
+		if (isbn == match_isbn)
+		{
+			cout <<"Details of book are as follows: "<<endl;
+			Book[i].show();
+		}
+	}
+}
+
+
+
+					LA FIN!!!!!

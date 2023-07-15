@@ -1,0 +1,257 @@
+======================================QUESTION # 01===================================================
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account
+{
+	float const roi;
+	float bal,total;
+	int number;
+	string name;
+	
+	public:
+		Account() : roz(0.25)
+		{}
+		void calculate()
+		{
+			total = roz*bal;
+		}
+		void show()
+		{
+			cout << "The zakaat you have to pay is: $"<<total<<endl;
+			cout << "The rate of zakaat is: "<<roz<<endl;
+		}
+		//setter 
+		void set_data(int account)
+		{
+			number = account;
+			
+		}
+		void input()
+		{
+			cout <<"Enter the name of account holder: "<<endl;
+			fflush(stdin);
+			getline(cin,name);
+			cout << "Enter the balance of account: "<<endl;
+			cin>>bal;
+		}
+		//getter
+		float get_zakaat()
+		{return total;}
+};
+
+int main()
+{
+	Account a1;
+	a1.input();
+	a1.calculate();
+	a1.show();
+}
+
+===================================QUESTION # 02======================================================
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class student
+{
+	string name;
+	float scores[5],sum;
+	public:
+		student()
+		{
+			sum = 0;
+		}
+		void input()
+		{
+			cout << "Enter the name of the student: "<<endl;
+			fflush(stdin);
+			getline(cin,name);
+			for (int i = 0 ; i < 5 ; i++)
+			{
+				cout <<"Enter the marks for exam "<<i+1<<endl;
+				cin>>scores[i];
+			}
+		}
+		float Totalscore()
+		{
+			for (int i = 0 ; i < 5 ; i++)
+			{
+				sum += scores[i];
+			}
+			return sum;
+		}
+		void highest(float highest)
+		{
+			if (sum == highest)
+			{
+				cout << "The name of the contender with highest sum of scores is "<<name<<endl<<endl;
+			}
+			
+		}
+		float get_sum()
+		{
+			return sum;
+		}
+};
+
+student s[3];
+
+void user_input ()
+{
+	float marks[3];
+	for (int i = 0 ; i < 3 ; i++)
+	{
+		marks[i] = s[i].Totalscore();
+	}
+	float temp= 0;
+	for (int i = 0 ; i<3 ; i++)
+	{
+		if (marks[i]>temp)
+		{
+			temp = marks[i];
+		}
+	}
+	for (int i = 0 ; i<3 ; i++)
+	{
+		s[i].highest(temp);
+	}
+	
+}
+
+int main()
+{
+	for (int i = 0; i<3 ; i++)
+	{
+		s[i].input();
+	}
+	user_input();
+}
+
+======================================QUESTION # 03===================================================
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account
+{
+	int account_no,security_code;
+	float account_bal;
+	public:
+		Account ()
+		{
+			security_code = 0;
+		}
+		void input()
+		{
+			cout << "Enter the account number "<<endl;
+			cin>>account_no;
+			if (security_code==0)
+			{
+				cout <<"Enter the security code "<<endl;
+				cin>>security_code;
+			}
+			else
+			{
+				cout <<"The security code is already set. You can't change it"<<endl;
+			}
+			cout << "Enter the account balance "<<endl;
+			cin>>account_bal;
+		}
+		void show()
+		{
+			cout <<"The account number is: "<<account_no<<endl;
+			cout <<"The account balance is: $"<<account_bal<<endl<<endl; 
+			
+		}
+		
+		
+		
+};
+
+int main()
+{
+	Account a;
+	a.input();
+	a.show();
+}
+
+===================================QUESTION # 04=====================================================
+
+#include <iostream>
+using namespace std;
+class A
+{
+	int static count;
+	public:
+		A()
+		{count++;}
+		int show_count()
+		{return count;}	
+};
+
+int A::count = 0;
+
+int main()
+{
+	A h[10];
+	cout<<"Number of elements is: "<<h[0].show_count();
+}
+
+====================================QUESTION # 05=====================================================
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account
+{
+	float const roi;
+	float bal,total;
+	int number;
+	string name;
+	
+	public:
+		Account() : roz(0.25)
+		{}
+		void calculate()
+		{
+			total = roz*bal;
+		}
+		void show()
+		{
+			cout << "The zakaat you have to pay is: $"<<total<<endl;
+			cout << "The rate of zakaat is: "<<roz<<endl;
+		}
+		//setter 
+		void set_data(int account)
+		{
+			number = account;
+			
+		}
+		void input()
+		{
+			cout <<"Enter the name of account holder: "<<endl;
+			fflush(stdin);
+			getline(cin,name);
+			cout << "Enter the balance of account: "<<endl;
+			cin>>bal;
+		}
+		//getter
+		float get_zakaat()
+		{return total;}
+};
+
+int main()
+{
+	Account a1;
+	a1.input();
+	a1.calculate();
+	a1.show();
+}
+
+				LA FIN!!!!!
