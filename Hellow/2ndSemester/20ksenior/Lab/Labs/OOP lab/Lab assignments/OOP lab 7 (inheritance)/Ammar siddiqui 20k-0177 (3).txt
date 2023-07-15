@@ -1,0 +1,330 @@
+====================================================== QUESTION # 01 =============================================
+
+#include <iostream>
+//#inude <iomanip>
+//#inlcude <cmath>
+#include <string>
+using namespace std;
+class book{
+	//protected:
+	string genre;
+	public:
+		string get_genre(){return genre;}
+		void set_genre(string g)
+		{
+			genre = g;
+		}
+};
+class book_narrative: protected book
+{
+	string name,author,publisher;
+	float price;
+	public:
+		
+		//default constructor
+		book_narrative(){}
+		//setter 
+		void set_data(string n, string a, string p)
+		{
+			name = n;
+			author = a;
+			publisher = p;
+		}
+		void set_price(float p)
+		{
+			price = p;
+		}
+		void call(string g)
+		{
+			set_genre(g);
+		}
+		//getter
+		string get_name(){return name;}
+		string get_author(){return author;}
+		string get_publisher(){return publisher;}
+		float get_price(){return price;}
+		void show()
+		{
+			cout <<"Name of the book is: "<<name<<endl<<"Author of book is: "<<author<<endl<<"Publisher is "<<publisher<<endl<<"Genre is: "<<get_genre()<<endl<<endl<<endl;
+		}
+};
+class book_novel: protected book
+{
+	string name,author,publisher;
+	float price;
+	public:
+	
+		//default constructor
+		book_novel(){}
+		//setter 
+		void set_data(string n, string a, string p)
+		{
+			name = n;
+			author = a;
+			publisher = p;
+		}
+		void set_price(float p)
+		{
+			price = p;
+		}
+		void call(string g)
+		{
+			set_genre(g);
+		}
+		//getter
+		string get_name(){return name;}
+		string get_author(){return author;}
+		string get_publisher(){return publisher;}
+		float get_price(){return price;}
+		void show()
+		{
+			cout <<"Name of the book is: "<<name<<endl<<"Author of book is: "<<author<<endl<<"Publisher is "<<publisher<<endl<<"Genre is: "<<get_genre()<<endl<<endl<<endl;
+		}
+};
+book_novel bn;
+book_narrative bna;
+void user()
+{
+	string name,author,publisher;
+	float price;
+	cout<<"Enter the name of the book: ";
+	fflush(stdin);
+	getline(cin,name);
+	cout<<"Enter the author of the book: ";
+	fflush(stdin);
+	getline(cin,author);
+	cout<<"Enter the publisher:";
+	fflush(stdin);
+	getline(cin,publisher); 
+	cout<<"Enter the price of book: ";
+	cin>>price;
+	bn.set_data(name,author,publisher);
+	bn.set_price(price);
+	bn.call("novel");
+	cout<<"Enter the name of the book: ";
+	fflush(stdin);
+	getline(cin,name);
+	cout<<"Enter the publisher:";
+	fflush(stdin);
+	getline(cin,publisher);
+	cout<<"Enter the author of the book: ";
+	fflush(stdin);
+	getline(cin,author);
+	cout<<"Enter the price of book: ";
+	cin>>price;
+	bna.set_data(name,author,publisher);
+	bna.set_price(price);
+	bna.call("Narrative");
+	bn.show();
+	bna.show();
+}
+int main()
+{
+	user();
+	return 0;
+}
+
+
+=================================================== QUESTION # 02 ================================================================================
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <string>
+using namespace std;
+class vehicle
+{
+	protected:
+	float price;
+	public:
+	void set_price(float price)
+	{
+		this->price = price;	
+	}	
+};
+class car: public vehicle
+{
+	protected:
+	int capacity,doors;
+	string fuel_type;
+	public:
+	void set_data(int c, int d, string f)
+	{
+		capacity = c;
+		doors = d;
+		fuel_type = f;	
+	}	
+};
+class motorcycle: public vehicle
+{
+	protected:
+	
+	int cylinders,gears,wheels;
+	//setter
+	public:
+	void set_data(int c, int g, int w)
+	{
+		cylinders = c;
+		gears = g;
+		wheels = w;
+	}
+	
+};
+class Yamaha: public motorcycle
+{
+	string make_type;
+	public:
+	void set_make(string make)
+	{
+		this->make_type = make;
+	}
+	void show()
+	{
+		cout <<"Number of cylinders: "<<cylinders<<endl<<"Price is: $"<<price<<endl<<"Number of gears: "<<gears<<endl<<"Number of wheels: "<<wheels<<endl<<"Make-type: "<<make_type<<endl<<endl<<endl;
+	}
+};
+
+class Audi: public car
+{
+	string model;
+	public:
+	void set_model(string model)
+	{
+		this->model = model;
+	}
+	void show()
+	{
+		cout <<"Price is: $"<<price<<endl<<"Seating capacity: "<<capacity<<endl<<"Number of doors: "<<doors<<endl<<"Fuel type: "<<fuel_type<<endl<<"Model: "<<model<<endl<<endl<<endl;
+	}
+};
+
+Audi A8;
+Yamaha R1;
+void user()
+{
+	int cap,doors;
+	float price;
+	string fuel,model;
+	cout<<"Enter the price of the car: "<<endl;
+	cin>>price;
+	cout<<"Enter the seating capacity: "<<endl;
+	cin>>cap;
+	cout<<"Enter the number of doors: "<<endl;
+	cin>>doors;
+	cout<<"Enter fuel type: "<<endl;
+	fflush(stdin);
+	getline(cin,fuel);
+	cout<<"Enter model type: "<<endl;
+	fflush(stdin);
+	getline(cin,model);
+	A8.set_data(cap,doors,fuel);
+	A8.set_model(model);
+	A8.set_price(price);
+	cout <<"Enter price of R1: "<<endl;
+	cin>>price;
+	cout<<"Enter number of cylinders: "<<endl;
+	cin>>cap;
+	cout<<"Enter number of gears: "<<endl;
+	cin>>doors;
+	int wheels;
+	cout<<"Enter number of wheels: "<<endl;
+	cin>>wheels;
+	cout<<"Enter make type: "<<endl;
+	fflush(stdin);
+	getline(cin,model);
+	R1.set_make(model);
+	R1.set_data(cap,doors,wheels);
+	R1.set_price(price);
+	A8.show();
+	R1.show();
+	
+}
+int main()
+{
+	user();
+	return 0;
+}
+
+==================================================== QUESTION # 03 =============================================================
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <string>
+using namespace std;
+class student
+{
+	protected:
+	string name,ID;
+	void set_data(string name, string i)
+	{
+		this->name = name;
+		ID = i;
+	}
+	void show_details()
+	{
+		cout <<"Name is: "<<name<<endl<<"ID: "<<ID<<endl;
+	}
+	
+	
+};
+class marks: protected student
+{
+	protected:
+	int marks_OOP,marks_PF,marks_ds,marks_db;
+	void set_marks(int p1, int p2, int p3, int p4)
+	{
+		marks_OOP = p1;
+		marks_PF = p2;
+		marks_ds = p3;
+		marks_db = p4;
+	}
+	void show_marks()
+	{
+		cout<<"Marks in OOP: "<<marks_OOP<<endl<<"Marks in PF: "<<marks_PF<<endl<<"Marks in DS: "<<marks_ds<<endl<<"Marks in DB: "<<marks_db;
+	}
+};
+class result: protected marks
+{
+	protected:
+	int total_marks;
+	double avg;
+	public:
+		void calculate()
+		{
+			total_marks = marks_OOP+marks_PF+marks_ds+marks_db;
+			avg = total_marks/4;
+		}
+		void display()
+		{
+			calculate();
+			show_details();
+			show_marks();
+			cout<<"Total marks are: "<<total_marks<<endl<<"Average is: "<<avg<<endl<<endl;
+		}
+		void input()
+		{
+			string n;
+			cout<<"Enter the name: "<<endl;
+			fflush(stdin);
+			getline(cin,n);
+			name = n;
+			cout<<"Enter ID: "<<endl;
+			fflush(stdin);
+			getline(cin,n);
+			ID = n;
+			set_marks(87,77,67,65);
+		}
+};
+
+int main()
+{
+	result r1;
+	r1.input();
+	r1.display();
+
+	return 0;
+}
+
+
+

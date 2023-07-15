@@ -1,0 +1,364 @@
+			QUESTION # 01:
+
+#include <iostream>
+using namespace std;
+float residential (int);
+float business (int,int);
+void display_residential(float,int);
+void display_business(float, int);
+int  main(void)
+{
+    float total;
+    int account_number,p_channels,b_customers;
+    char ccode;
+    cout<<"Please enter your account number, customer code "<<endl;
+    cin>>account_number>>ccode;
+    if (ccode=='r' || ccode=='R')
+    {
+        cout<<"Enter number of prime channels you want to subscribe"<<endl;
+        cin>>p_channels;
+        total = residential(p_channels);
+        display_residential(total,account_number);
+    }
+    else if (ccode == 'b' || ccode=='B')
+    {
+        cout<<"Enter number of business customers, nuber of premium channels "<<endl;
+        cin>>b_customers;
+        cin>>p_channels;
+        total = business(b_customers,p_channels);
+        display_business(total,account_number);
+    }
+    else
+    {
+        cout<<"Invalid input"<<endl;
+    }
+    return 0;
+    
+}
+
+float residential (int channels)
+{  
+    float temp,total;
+    temp=channels*7.50;
+    total = 4.50+20.50+temp;
+    return total; 
+}
+float business (int customers, int channels)
+{
+    float temp,new_customers,total;
+    if (customers<=10)
+    {
+        temp=75*customers;
+        float connection_bill;
+        connection_bill=channels*50.00;
+        total=connection_bill + temp + 15.00;
+    }
+    else
+    {
+        new_customers=customers-10;
+        float temp2;
+        temp=75*10;
+        temp2=80*new_customers;
+        float channel_bill;
+        channel_bill=channels * 50.00;
+        total=temp+temp2+channel_bill+15.00;
+        return total;
+
+    }
+    
+}
+void display_residential(float total,int acc)
+{
+    cout<<"Bill processing fee: $4.50"<<endl<<"Basic service fee: $20.50"<<endl<<"Premium channels:$ 7.50 per channel"<<endl;
+    cout<<"Your total bill is amounted to: $"<<total<<endl;
+    cout<<"Your account number is: "<<acc<<endl;
+}
+void display_business(float total, int acc)
+{   
+    cout<<"Bill processing fee: $15.00"<<endl<<"Basic Service fee: $75.00 for first 10 conections and $5.00 for each additional connection"<<endl << "Premium channels: $50.00 per channel for any number of connections"<<endl;
+    cout<<"Your total bill is ammounted to: $"<<total<<endl<<"Your account number is: "<<acc<<endl; 
+}
+
+
+				QUESTION # 02:
+
+
+#include <iostream>
+#include <string>
+//#include <ctype>
+using namespace std;
+
+int showchoices();
+float feetandinchestometerandcent(float* ptr,float inches);
+float metersandcenttofeetandinches(float* ptr, float cent);
+
+int main()
+{
+    int choice; 
+    char exit;
+    float feet,inch,meters,cm;    //1 is for feet to meter and 2 is for meter to feet
+    while (1)
+    {
+        choice = showchoices();
+        if (choice==1)
+        {
+            cout<<"Enter the value in feet and inches";
+            cin>>feet>>inch;
+            if (feet < 0 || inch < 0)
+            {
+                cout<<"The entered input is wrong"<<endl;
+                continue;
+            }
+            else
+            {
+                cm= feetandinchestometerandcent(&feet,inch);
+                cout<<"The converted value is "<<feet<<" meters and "<<cm<<" centimeters "<<endl;
+            }
+            
+        }
+        else if (choice==2) 
+        {
+            cout<<"Enter the value in meters and centimeters"<<endl;
+            cin>>meters>>cm;
+            if (meters < 0 || cm < 0)
+            {
+                cout<<"The entered input is wrong"<<endl;
+            }
+            else
+            {
+                inch = metersandcenttofeetandinches(&meters,cm);
+                cout<<"The converted value in feet is "<<meters<<" ft and "<<inch<<" inches "<<endl;
+            }
+            
+        }
+        else if (choice == 0)
+        {
+            break;
+        }
+        else 
+        {
+            cout<<"Invalid choice"<<endl;
+        }
+    }
+    
+}
+
+int showchoices()
+{
+    int choice;
+    cout << "Press 1 to use the program to convert feet and inches to meters and centimenetrs"<<endl<<"Press 2 to use the program to convert meters and centimeters to feet and inches"<<endl<<"Press 0 to exit the program"<<endl;
+    cin>>choice;
+    return choice;
+}
+
+float feetandinchestometerandcent(float *ptr,float inches)
+{
+    float cm,meters;
+    cm=inches*2.54;
+    //return cm;
+    meters=*ptr*0.3048;
+    *ptr=meters;
+    return cm;
+}
+
+float  metersandcenttofeetandinches(float* ptr, float cent)
+{
+    float feet,inches;
+    inches= 0.393701 * cent;
+    feet = (*ptr) *3.28084;
+    *ptr=feet;
+    return inches;
+    
+}
+
+				QUESTION # 03:
+
+#include <iostream>
+using namespace std;
+float residential(int minutes);
+float premium (int day, int night);
+int main()
+{
+    int account_number,minute;
+    char scode;
+    cout << "Please enter your account number, service code (Residential or Premium)"<<endl;
+    cin >>account_number;
+    cin>>scode;
+    if (scode=='r' || scode=='R')
+    {
+        cout <<"Please enter number of minutes: "<<endl;
+        cin>>minute;
+        float total;
+        total = residential (minute);
+        cout<<"Your account number is : "<<account_number<<endl<<"Your total time of usage is : "<< minute <<endl<<"Your service code is : "<<scode<<endl<<"Your total bill is : $"<<total<<endl;
+        cout<<"Thank you for using our services"<<endl;
+    }
+    else if (scode=='p' || scode=='P')
+    {
+        int min_day,min_night;
+        cout << "Please enter number of minutes used in day time i.e (between 6 AM and 6 PM)"<<endl;
+        cin>>min_day;
+        cout<<"Please enter number of minutes used in night time i.e (between 6 PM and 6 AM)"<<endl;
+        cin>>min_night;
+        minute=min_night+min_day;
+        float total;
+        total = premium (min_day,min_night);
+        cout<<"Your account number is : "<<account_number<<endl<<"Your total time of usage is : "<< minute <<endl<<"Your service code is : "<<scode<<endl<<"Your total bill is : $"<<total<<endl;
+        cout<<"Thank you for using our services"<<endl;
+    }
+    else
+    {
+        cout<<"Invalid input"<<endl;
+    }
+    
+}
+
+float residential(int minutes)
+{
+    float total;
+    if (minutes <= 50)
+    {
+        total=10.00;
+        return (total);
+    }
+    else
+    {
+        float temp,new_time;
+        new_time= minutes-50;
+        temp=new_time * 0.20;
+        total= 10 + temp;
+        return (total); 
+    }
+    
+    
+
+}
+float premium (int day, int night)
+{
+    float total;
+    int temp_day,temp_night,new_day,new_night;
+    if (day <= 75)
+    {
+        temp_day=0;
+    }
+    else 
+    {
+        new_day=day-75;
+        temp_day=0.10*new_day;
+    }
+    if (night <= 100)
+    {
+        temp_night=0;
+    }
+    else
+    {
+        new_night=night-100;
+        temp_night=0.05*new_night;
+    }
+    total = temp_day+temp_night;
+    return (total);
+    
+}
+
+
+				QUESTION # 04:
+
+#include <iostream>
+#include <cmath>
+#define pi 3.1416
+using namespace std;
+float Radius (float x1, float y1, float x2, float y2)
+{
+    float temp_distance_x,distance,temp_distance_y;
+    temp_distance_x=pow((x2-x1),2);
+    temp_distance_y = pow ((y2-y1),2);
+    distance = pow((temp_distance_x + temp_distance_y),0.5);
+    return (distance);
+}
+float Circumference (float r)
+{
+    return (2*pi*r);
+}
+float Area (float r)
+{
+    return (pi*r*r);
+}
+
+int main()
+{
+    float x1,x2,y1,y2;
+    cout<<"Please enter the coordinates of the first point: "<<endl;
+    cin>>x1>>y1;
+    cout<<"Please enter the coordinates of the second point: "<<endl;
+    cin>>x2>>y2;
+    float dist;
+    dist= Radius(x1,y1,x2,y2);
+    cout<<"The distance between the two entered points are: "<<dist<<endl;
+
+    cout<< "Please enter coordinates of the centre of circle: "<<endl;
+    cin>>x1>>y1;
+    cout<<"Please enter coordinates of the point: "<<endl;
+    cin>>x2>>y2;
+    float radius,circumference,area;
+    radius = Radius(x1,y1,x2,y2);
+    cout<<"The radius of the circle according to entered parameters is: "<<radius<<"units"<<endl;
+    circumference = Circumference(radius);
+    cout<<"The circumference of the circle is: "<<circumference<<"units"<<endl;
+    area = Area(radius);
+    cout<<"The area of the circle is: "<<area<<"sq units"<<endl;
+
+
+    
+
+}
+
+				QUESTION # 05:
+
+#include <iostream>
+
+using namespace std;
+
+float bill (float sal, int time, float old_rate)
+{
+    float rate= old_rate/60;
+    if (sal<=25000)
+    {
+        if (time <= 30)
+        {
+            return 0;
+        }
+        else 
+        {
+            int new_time;
+            new_time=time - 30;
+            return (0.4 *(rate) * new_time);
+        }
+    }
+    else
+    {
+        if (time<=20)
+        {
+            return 0;
+        }
+        else
+        {
+            int new_time;
+            new_time=time - 20;
+            return (0.7*(rate)*new_time);
+        }
+    }
+}
+int main()
+{
+    int time;
+    float sal,total,rate;
+    cout<<"Welcome to J&J accounting firm"<<endl<<endl;
+    cout<<"Enter your salary, time that you want with the firm (in minutes) "<<endl;
+    cin>>sal>>time;
+    cout<<"Enter the hourly rate "<<endl;
+    cin>>rate;
+    total = bill (sal, time, rate);
+    cout<<"Your total bill is : $"<<total<<endl;
+}
+
+

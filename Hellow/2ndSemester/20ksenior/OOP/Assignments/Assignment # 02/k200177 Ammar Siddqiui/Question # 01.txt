@@ -1,0 +1,163 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+using namespace std;
+
+class package
+{
+	protected:
+	string sender,receiver,address_receiver,s_city,r_city,s_state,r_state;
+	int r_zip;
+	float weight,rate;
+	
+	//default constructor
+	package()
+	{}
+	//paramterized constructor
+	package(string s,string r, string ar, string sc, string rc, string ss, string rs, int zip, float w, float p)
+	{
+		sender = s;
+		receiver = r;
+		address_receiver = ar;
+		s_city = sc;
+		r_city = rc;
+		s_state = ss;
+		r_state = rs;
+		r_zip = zip;
+		if (w>0)
+		{
+			weight = w;
+		}
+		else
+		{
+			cout<<"Invalid input of weight"<<endl;
+		}
+		if (p>0)
+		{
+			rate = p;
+		}
+		else
+		{
+			cout<<"Invalid input of price"<<endl;
+		}
+	}
+	public:
+		double calculatecost()
+		{
+			double bill;
+			bill = weight * rate;
+			return bill;
+		}
+		void input()
+		{
+			fflush(stdin);
+			cout<<"Enter name of the sender: "<<endl;
+			getline(cin,sender);
+			cout<<"Enter name of receiver: "<<endl;
+			getline(cin,receiver);
+			cout<<"Enter Address of receiver: "<<endl;
+			getline(cin,address_receiver);
+			cout<<"Enter sender city: "<<endl;
+			getline(cin,s_city);
+			cout<<"Enter receiver city: "<<endl;
+			getline(cin,r_city);
+			cout<<"Enter sender state: "<<endl;
+			getline(cin,s_state);
+			cout<<"Enter receiver state: "<<endl;
+			getline(cin,r_state);
+			cout<<"Enter zip code: "<<endl;
+			cin>>r_zip;
+			float p,w;
+			cout<<"Enter weight in ounces: "<<endl;
+			cin>>w;
+			if (w>0)
+			{
+				weight = w;
+			}
+			else
+			{
+				cout<<"Invalid input: "<<endl;
+			}
+			cout<<"Enter rate of the delivery: "<<endl;
+			cin>>p;
+			if (p>0)
+			{
+				rate = p;
+			}
+			else
+			{
+				cout<<"Invalid input: "<<endl;
+			}
+		}
+	
+	
+	
+};
+
+class twodaypackage : public package
+{
+	float flat_fee;
+	public:
+		//default constructor
+		twodaypackage()
+		{}
+		// parametrized constructor
+		twodaypackage(float f)
+		{
+			flat_fee = f;
+		}
+		double calculatecost()
+		{
+			double bill;
+			bill = (weight * rate) + flat_fee;
+			return bill;
+		}
+		void input()
+		{
+			package::input();
+			cout<<"Enter flat fee for two day package: "<<endl;
+			cin>>flat_fee;
+		}
+};
+
+class overnightpackage : public package
+{
+		float add_fee;
+		public:
+			//constructor
+			overnightpackage()
+			{}
+			overnightpackage(float f)
+			{
+				add_fee = f;
+			}
+			void input()
+			{
+				package::input();
+				cout<<"Enter the additional fee per ounce: "<<endl;
+				cin>>add_fee;
+			}
+			double calcluatecost()
+			{
+				float temp;
+				temp = weight * add_fee;
+				double bill;
+				bill = (weight * rate) + temp;
+				return (bill);
+			}
+};
+
+int main()
+{
+	twodaypackage obj1;
+	obj1.input();
+	double bill;
+	bill = obj1.calculatecost();
+	cout<<"Two day package delivery cost is: Rs "<<bill<<endl;
+	overnightpackage obj2;
+	obj2.input();
+	//double bill;
+	bill = obj2.calculatecost();
+	cout<<"Overnight package delivery cost is: Rs "<<bill<<endl;
+}

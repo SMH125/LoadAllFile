@@ -1,0 +1,266 @@
+#include <iostream>
+#include <string>
+using namespace std;
+static int ordercount=  0;
+static int menucount = 0;
+struct menuitem
+{
+	string name,type;
+	float price;
+};
+class Coffeeshop
+{
+	string name;
+	menuitem menu[20];
+	string orders[20];
+	double total;
+	public:
+		Coffeeshop(){}
+		Coffeeshop(string n)
+		{
+			name = n;
+			total = 0; 
+			for (int i=0 ; i<20 ; i++)
+			{
+				orders[i]='0';
+			}
+		}
+		void add_menu()
+		{
+			int n;
+			cout << "Enter the number of items you have in your shop "<<endl;
+			cin>>n;
+			menucount = n;
+			for (int i=0 ; i<n ; i++)
+			{
+				cout << "Enter the name of item number "<<i+1<<endl;
+				fflush(stdin);
+				getline(cin,menu[i].name);
+				cout << "Enter the type of the item "<<i+1<<endl;
+				fflush(stdin);
+				getline(cin,menu[i].type);
+				cout <<"Enter the price of the item "<<i+1<<endl;
+				cin>>menu[i].price;
+			}
+		}
+		void show()
+		{
+			cout <<"The items available in the restaurant are: "<<endl;
+			for (int i=0;i<menucount;i++)
+			{
+				cout<<i+1<<". "<<menu[i].name<<endl;
+			}
+		}
+		int addorder(string ord)
+		{
+			int check = 0;
+			for (int i=0 ; i<menucount ; i++)
+			{
+				if (menu[i].name==ord)
+				{
+					orders[ordercount]=ord;
+					check = 1;
+					if (ordercount<20)
+					{
+						ordercount++;
+						total += menu[i].price;
+					}
+					
+				}
+			}
+			if (check==0)
+			{
+				cout << "The item you entered is currently unavailable "<<endl;
+			}
+			return check;
+		}
+		void fulfillorder()
+		{
+			int check = 0;
+			for (int i=0 ; i<ordercount ; i++)
+			{
+				if (orders[i]!="0")
+				{
+					cout << "The "<<orders[i]<<" is ready "<<endl;
+					check = 1;
+				}
+			}
+			if (check==0)
+			{
+				cout <<"All orders have been fulfilled"<<endl;
+			}
+			system("PAUSE");
+			for (int i=0 ; i<ordercount ; i++)
+			{
+				orders[i]='0';
+			}
+			ordercount = 0;
+			//return total;
+		}
+		void listorders()
+		{
+			if (ordercount == 0)
+			{
+				cout << "No orders are here"<<endl;
+			}
+			else
+			{
+				cout <<"The list of orders is: "<<endl;
+				for (int i=0 ; i<ordercount ; i++)
+				{
+					cout << orders[i]<<endl;
+				}
+			}
+			
+		}
+		double dueamount()
+		{
+			return total;
+		}
+		string cheapestitem()
+		{
+			string cheapest;
+			float min=10000;
+			for (int i=0 ; i<menucount ;i++)
+			{
+				if (menu[i].price<min)
+				{
+					min = menu[i].price;
+				}
+			}
+			for (int i=0 ; i<menucount ; i++)
+			{
+				if (menu[i].price==min)
+				{
+					cheapest = menu[i].name;
+				}
+			}
+			return (cheapest);
+		}
+		void drinkOnly(string* ptr)
+		{
+			for (int i=0,j=0;i<menucount ; i++)
+			{
+				if (menu[i].type=="drink")
+				{
+					ptr[j]=menu[i].name;
+					j++;
+				}
+			}
+		}
+		void foodOnly(string *ptr)
+		{
+			for (int i=0,j=0 ; i<menucount ; i++)
+			{
+				if (menu[i].type=="food")
+				{
+					ptr[j]=menu[i].name;
+					j++;
+				}
+			}
+		}
+		string get_name()
+		{return name;}
+};
+void choice ()
+{
+	cout <<"Please select the function you want to perform "<<endl<<"1. To add order"<<endl<<"2. To fulfill the orders"<<endl<<"3. To view the list of the things you have ordered"<<endl<<"4. To see the bill and exit the program"<<endl<<"5. To see the cheapest item from the menu"<<endl<<"6. To see drinks only"<<endl<<"7. To see food only"<<endl;
+	
+}
+int main()
+{
+	system("CLS");
+	string s_name,name,cheap,arr[20];
+	cout<<"Enter the name of the shop "<<endl;
+	fflush(stdin);
+	getline(cin,name);
+	Coffeeshop c1(name);
+	c1.add_menu();
+	system("CLS");
+	s_name = c1.get_name();
+	int n,check;
+	while (1)
+	{
+		//system("CLS");
+		cout <<"Welcome to "<<s_name<<endl<<endl;
+		c1.show();
+		choice();
+		cin>>n;
+		switch (n)
+		{
+			case (1):
+				cout<<"Enter the name of the item you want to order "<<endl;
+				fflush(stdin);
+				getline(cin,name);
+				check = c1.addorder(name);
+				if (check == 1)
+				{
+					system("CLS");
+					cout <<"Order added "<<endl;
+					system("PAUSE");
+				}
+				break;
+			case (2):
+				//double total;
+				c1.fulfillorder();
+				//cout <<endl<<"The total bill is: "<<total;
+				//exit(0);
+				break;
+			case (3):
+				system("CLS");
+				c1.listorders();
+				break;
+			case (4):
+				double bill;
+				bill = c1.dueamount();
+				cout <<"Your total bill is "<<bill<<endl;
+				exit (1);
+			case (5):
+				//string cheap;
+				cheap = c1.cheapestitem();
+				system("CLS");
+				cout <<"The cheapest item on the menu is "<<cheap<<endl;
+				system("PAUSE");
+				break;
+			case (6):
+				system("CLS");
+				cout <<"The list of drinks only is: "<<endl;
+				//string arr[20];
+				for (int i =0 ;i<20 ; i++)
+				{
+					arr[i]="0";
+				}
+				c1.drinkOnly(arr);
+				for (int i=0 ; i<menucount ;i++)
+				{
+					if (arr[i]!="0")
+					{
+						cout <<arr[i]<<endl;
+					}
+				}
+				break;
+			case 7:
+				system("CLS");
+				cout <<"The list of food only items are:"<<endl;
+				//string arr2[20];
+				c1.foodOnly(arr);
+				for (int i=0 ; i<menucount ;i++)
+				{
+					if (arr[i]!="0")
+					{
+						cout <<arr[i]<<endl;
+					}
+				}
+				break;
+			default:
+				cout<<"Invalid input"<<endl;
+			
+	
+				
+				
+		}
+	}
+
+	
+	return 0;	
+}

@@ -1,0 +1,214 @@
+====================================== QUESTION # 01 =============================================================
+
+#include <iostream>
+#include <string>
+#include <string>
+
+using namespace std;
+class Animal
+{
+	public:
+		void animalsound()
+		{
+			cout<<"The animal makes a sound"<<endl;
+		}
+};
+
+class cat: public Animal
+{
+	public:
+		void animalsound()
+		{
+			cout<<"The cat says meow"<<endl;
+		}
+};
+
+class dog : public Animal
+{
+	public:
+		void animalsound()
+		{
+			cout<<"The dog says bow wow "<<endl;
+		}
+};
+
+class Duck: public Animal
+{
+	public:
+		void animalsound()
+		{
+			cout<<"The duck says quack quack "<<endl;
+		}
+};
+
+int main()
+{
+	cat c1;
+	c1.animalsound();
+	Animal a;
+	a.animalsound();
+	Duck d;
+	d.animalsound();
+	dog d1;
+	d1.animalsound();
+	
+}
+
+============================================ QUESTION # 02 ===========================================================================
+
+#include <iostream>
+//#include <string>
+#include <string>
+#define pi 3.141
+using namespace std;
+
+float calculations(float side)
+{
+	float volume_cube;
+	volume_cube = side*side*side;
+	return (volume_cube);
+}
+float calculations(float r, float h)
+{
+	float volume_cylinder;
+	volume_cylinder = pi*r*r*h;
+	return (volume_cylinder);
+}
+float calculations(float l, float b, float h)
+{
+	float volume_rectangle;
+	volume_rectangle = l*b*h;
+	return (volume_rectangle);
+}
+
+int main()
+{
+	cout<<"The volume of cube is: "<<calculations(5.56)<<endl;
+	cout<<"The volume of Cylinder is: "<<calculations(11.56,5.5)<<endl;
+	cout<<"The volume of box is: "<<calculations(4.5,7.4,5.4)<<endl;
+	
+}
+
+============================================  QUESTOIN # 03 ========================================================================================
+
+#include <iostream>
+#include <string>
+#include <string>
+
+using namespace std;
+class person
+{
+	protected:
+		string name;
+		int id;
+		float bonus,salary;
+		void input()
+		{
+			cout<<"Enter ID of the employee: "<<endl;
+			cin>>id;
+		}
+		void show()
+		{
+			cout<<"The ID of the employee is: "<<id<<endl;
+		}
+		/*void bonus(float salary)
+		{
+			bonus = (5/100)*salary;
+		}*/
+		
+};
+
+class admin : public person
+{
+	public:
+		void bonus_calculate()
+		{
+			bonus = 0.05*salary;
+			
+		}
+		void input()
+		{
+			cout <<"Enter name of the admin: "<<endl;
+			fflush(stdin);
+			getline(cin,name);
+			person::input();
+			cout<<"Enter salary of admin: "<<endl;
+			cin>>salary;
+			bonus_calculate();
+		}
+		void show()
+		{
+			cout<<"The name of the admin is: "<<name<<endl;
+			cout<<"The ID of the admin is: "<<id<<endl;
+			cout<<"The salary is: $"<<salary<<endl;
+			cout<<"The bonus is: $"<<bonus<<endl<<endl;
+		}
+		
+};
+
+class accounts : public person
+{
+	public:
+	void input()
+		{
+			cout <<"Enter name of the accounts: "<<endl;
+			fflush(stdin);
+			getline(cin,name);
+			person::input();
+			cout<<"Enter salary of employee: "<<endl;
+			cin>>salary;
+			bonus_calculate();
+		}
+		void show()
+		{
+			cout<<"The name of the admin is: "<<name<<endl;
+			cout<<"The ID of the admin is: "<<id<<endl;
+			cout<<"The salary is: $"<<salary<<endl;
+			cout<<"The bonus is: $"<<bonus<<endl<<endl;
+		}
+		void bonus_calculate()
+		{
+			bonus = 0.05*salary;
+		}
+};
+
+int main()
+{
+	admin a;
+	accounts a1;
+	a.input();
+	a.show();
+	a1.input();
+	a1.show();
+}
+
+=================================================== QUESTION # 04 ================================================================
+#include <iostream>
+#include <string>
+#include <string>
+
+using namespace std;
+
+int mult(int x, int y)
+{
+	return (x*y);
+}
+int mult(int x, int y,int z)
+{
+	return (x*y*z);
+}
+double mult(double x, double y)
+{
+	return (x*y);
+}
+double mult(double x, double y, double z)
+{
+	return (x*y*z);
+}
+
+int main()
+{
+	cout<<"2 numbers multiply: "<<mult(3,4)<<endl<<"3 numbers multiply: "<<mult(6,7,2)<<endl<<"2 float numbers multiply: "<<mult(4.5,3.7)<<endl<<"3 float numbers multiply: "<<mult(4.4,6.7,8.9)<<endl;
+}
+
+							LA FIN!!!!

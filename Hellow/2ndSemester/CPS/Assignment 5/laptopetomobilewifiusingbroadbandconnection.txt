@@ -1,0 +1,5 @@
+DESKTOP-RK1L2A2 0212
+8032@Ot2
+netsh wlan set hostednetwork mode=allow ssid=DESKTOP-RK1L2A2-0212 key=8032@Ot2
+netsh wlan start hostednetwork
+netsh wlan stop hostednetwork

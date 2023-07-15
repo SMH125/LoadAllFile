@@ -1,0 +1,59 @@
+	char plate_num[10];
+	char brand[20];
+	char model[20];
+	float capacity;
+	char colour[20];
+	float rate_per_hour;
+	float rate_per_half;
+	float rate_per_day;
+	char transmission[6];
+
+functions___________________________________
+
+
+	char* setBrand();
+	char* setModel();
+	float setRatehour();
+	float setRateHalf();
+                      float setRateDay();
+	char* setTransmission();
+
+    char* setBrand()
+    {
+      cout<<"Enter Brand name : ";
+      cin.getline(brand,19);
+     return brand;
+     }
+    char* setModel()
+    {
+      cout<<"Enter Model of car : ";
+      cin.getline(model,19);
+     return model;
+     }	
+     char* setColor()
+    {
+      cout<<"Enter color name : ";
+      cin.getline(color,19);
+     return color;
+     }
+    float setRatehour(){
+    cout<<"Enter rate pe hour;
+    cin>>rate_per_hour;
+    return rate_per_hour;
+    }
+   float setRateHalf(){
+   cout<<"Enter rate per half;
+   cin>>rate_per_half;
+ return rate_per_half;    
+}
+    float setRateDay(){
+   cout<<"Enter rate per Day;
+   cin>>rate_per_day;
+ return rate_per_day;    
+}
+char* setTransmission()
+    {
+      cout<<"Enter Transmission : ";
+      cin.getline(transmission,5);
+     return transmission;
+     }
